@@ -2,6 +2,26 @@ require 'spec_helper'
 require 'extreme_feedback_device/jenkins'
 
 describe ExtremeFeedbackDevice::Jenkins do
+  context ".user" do
+    it "responds to user" do
+      subject.should be_respond_to "user"
+    end
+
+    it "responds to user=" do
+      subject.should be_respond_to "user="
+    end
+  end
+
+  context ".token" do
+    it "responds to token" do
+      subject.should be_respond_to "token"
+    end
+
+    it "responds to token=" do
+      subject.should be_respond_to "token="
+    end
+  end
+
   context ".base_url" do
     it "responds to base_url" do
       subject.should be_respond_to "base_url"
