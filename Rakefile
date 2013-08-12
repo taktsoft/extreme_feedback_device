@@ -21,7 +21,7 @@ namespace :pi do
     end
 
     desc "turn all LEDs on / white"
-    task off: [:environment] do
+    task on: [:environment] do
       num_leds = ENV['NUM_LEDS'] || 25
       pi = ExtremeFeedbackDevice::Pi.new(num_leds)
       pi.leds_white!

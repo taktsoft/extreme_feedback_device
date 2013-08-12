@@ -24,7 +24,7 @@ module ExtremeFeedbackDevice
     end
 
     def leds_black!
-      all_black && write!
+      leds_black && write!
     end
 
     def write!
