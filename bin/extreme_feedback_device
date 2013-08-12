@@ -1,0 +1,17 @@
+#!/usr/bin/env ruby
+
+if ENV['RUBY_ENV'] == 'development'
+  lib = File.expand_path('../../lib', __FILE__)
+  $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
+
+  require 'pry'
+end
+
+begin
+  require 'extreme_feedback_device'
+rescue LoadError
+  require 'rubygems'
+  require 'extreme_feedback_device'
+end
+
+exit ExtremeFeedbackDevice::CLI.instance.main
