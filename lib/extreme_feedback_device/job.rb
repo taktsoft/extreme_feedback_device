@@ -13,7 +13,7 @@ module ExtremeFeedbackDevice
       def from_json_object(attributes)
         health_report = attributes['healthReport']
         attributes['score'] = health_report.first.nil? ? nil : health_report.first['score']
-        self.new(attributes['name'], attributes['color'], attributes['score'])
+        new(attributes['name'], attributes['color'], attributes['score'])
       end
     end
 

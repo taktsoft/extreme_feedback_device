@@ -2,7 +2,7 @@ module ExtremeFeedbackDevice
   class CLI
     class << self
       def instance
-        @instance ||= self.new(ARGV.dup)
+        @instance ||= new(ARGV.dup)
       end
     end
 

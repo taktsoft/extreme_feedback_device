@@ -27,5 +27,4 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency "rb-inotify"
 
   spec.add_dependency "color"
-  spec.add_dependency "pi_piper"
 end
