@@ -46,7 +46,7 @@ EOS
     end
 
     def main
-      if argv.length != 1
+      if argv.length < 3 || argv.length > 4
         usage
       else
         run

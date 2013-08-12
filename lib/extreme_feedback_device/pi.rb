@@ -11,19 +11,19 @@ module ExtremeFeedbackDevice
       num_leds.times { @leds << Color::RGB.new }
     end
 
-    def all_white
+    def leds_white
       leds.map! { |led| Color::RGB::White }
     end
 
-    def all_white!
-      all_white && write!
+    def leds_white!
+      leds_white && write!
     end
 
-    def all_black
+    def leds_black
       leds.map! { |led| Color::RGB::Black }
     end
 
-    def all_black!
+    def leds_black!
       all_black && write!
     end
 
