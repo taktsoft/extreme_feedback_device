@@ -1,9 +1,18 @@
+require 'logger'
 require 'rubygems'
 
 require "extreme_feedback_device/version"
 
 module ExtremeFeedbackDevice
   class << self
+    def logger
+      if settings['log']
+        @logger ||= ::Logger.new(settings.log.file, settings.log['keep'], settings.log['size'])
+      else
+        @logger ||= ::Logger.new(STDOUT)
+      end
+    end
+
     def settings
       @settings ||= ExtremeFeedbackDevice::Settings
     end
@@ -13,7 +22,7 @@ module ExtremeFeedbackDevice
     end
 
     def pi
-      @pi ||= ExtremeFeedbackDevice::Pi.new(settings.pi.num_leds)
+      @pi ||= ExtremeFeedbackDevice::Pi.new(settings.pi.num_leds, settings.spi['device'])
     end
 
     def run
@@ -27,32 +36,34 @@ module ExtremeFeedbackDevice
           job = jobs.find { |job| job.name == job_name }
           if job
             if job.fail?
-              pi.leds[led_idx] = Color::RGB::Red
+              pi.leds[led_idx] = ::Color::RGB::Red
             elsif job.unstable?
-              pi.leds[led_idx] = Color::RGB::Yellow
+              pi.leds[led_idx] = ::Color::RGB::Yellow
             elsif job.success?
-              pi.leds[led_idx] = Color::RGB::Green
+              pi.leds[led_idx] = ::Color::RGB::Green
             elsif job.inactive?
-              pi.leds[led_idx] = Color::RGB::Grey
+              pi.leds[led_idx] = ::Color::RGB::Grey
             elsif job.disabled?
-              pi.leds[led_idx] = Color::RGB::Grey
+              pi.leds[led_idx] = ::Color::RGB::Grey
             else # any other state
-              pi.leds[led_idx] = Color::RGB::Black
+              pi.leds[led_idx] = ::Color::RGB::Black
             end
           else # no job with this name in jenkins
-            pi.leds[led_idx] = Color::RGB::Black
+            pi.leds[led_idx] = ::Color::RGB::Black
           end
         else # no job associated with this led_idx
-          pi.leds[led_idx] = Color::RGB::Black
+          pi.leds[led_idx] = ::Color::RGB::Black
         end
       end
       pi.write!
     end
 
     def infiniti_loop
+      settings['infiniti_loop'] ||= {}
+      interval = settings.infiniti_loop['sleep'] || 30
       while true
         run
-        sleep settings.infiniti_loop.sleep
+        sleep(interval)
       end
     end
   end

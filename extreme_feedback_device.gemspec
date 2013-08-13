@@ -28,4 +28,5 @@ Gem::Specification.new do |spec|
 
   spec.add_dependency "color", "~> 1.4"
   spec.add_dependency "settingslogic", "~> 2.0"
+  spec.add_dependency "pidfile", "~> 0.3"
 end

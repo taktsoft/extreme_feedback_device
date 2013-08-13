@@ -14,4 +14,4 @@ rescue LoadError
   require 'extreme_feedback_device'
 end
 
-exit ExtremeFeedbackDevice::CLI.instance.main
+ExtremeFeedbackDevice::CLI.instance.main

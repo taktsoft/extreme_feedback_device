@@ -6,13 +6,14 @@ module ExtremeFeedbackDevice
   class Pi
     attr_reader :leds
 
-    def initialize(num_leds)
+    def initialize(num_leds, spi_device=nil)
       @leds = []
-      num_leds.times { @leds << Color::RGB.new }
+      num_leds.times { @leds << ::Color::RGB.new }
+      @spi_device = spi_device
     end
 
     def leds_white
-      leds.map! { |led| Color::RGB::White }
+      leds.map! { |led| ::Color::RGB::White }
     end
 
     def leds_white!
@@ -20,7 +21,7 @@ module ExtremeFeedbackDevice
     end
 
     def leds_black
-      leds.map! { |led| Color::RGB::Black }
+      leds.map! { |led| ::Color::RGB::Black }
     end
 
     def leds_black!
@@ -34,7 +35,7 @@ module ExtremeFeedbackDevice
   private
 
     def spi
-      @spi ||= ExtremeFeedbackDevice::SPI.new(nil)
+      @spi ||= ExtremeFeedbackDevice::SPI.new(@spi_device)
     end
 
     def colors

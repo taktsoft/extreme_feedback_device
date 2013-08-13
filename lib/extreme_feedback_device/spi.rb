@@ -9,7 +9,7 @@ module ExtremeFeedbackDevice
     end
 
     def write(data)
-      File.open(device, 'wb') do |spi|
+      ::File.open(device, 'wb') do |spi|
         spi.write(data)
         spi.flush
       end
