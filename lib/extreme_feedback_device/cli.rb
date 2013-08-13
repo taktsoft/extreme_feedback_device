@@ -135,7 +135,7 @@ extreme_feedback_device [OPTION] ...
 EOS
     end
 
-    def version
+    def puts_version
       puts <<-EOS
 extreme_feedback_device v#{ExtremeFeedbackDevice::VERSION}
 

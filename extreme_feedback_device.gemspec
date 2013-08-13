@@ -8,8 +8,8 @@ Gem::Specification.new do |spec|
   spec.version       = ExtremeFeedbackDevice::VERSION
   spec.authors       = ["Michael Nowak"]
   spec.email         = ["nowak@taktsoft.com"]
-  spec.description   = %q{TODO: Write a gem description}
-  spec.summary       = %q{TODO: Write a gem summary}
+  spec.description   = %q{Sets LEDs of an Extreme Feedback Device to a Status of a Job in Jenkins}
+  spec.summary       = %q{Sets LEDs of an Extreme Feedback Device to a Status of a Job in Jenkins}
   spec.homepage      = "http://www.taktsoft.com/"
   spec.license       = "MIT"
 
@@ -27,6 +27,7 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency "rb-inotify", "~> 0.9"
 
   spec.add_dependency "color", "~> 1.4"
+  spec.add_dependency "daemons", "~> 1.1"
   spec.add_dependency "settingslogic", "~> 2.0"
   spec.add_dependency "pidfile", "~> 0.3"
 end
