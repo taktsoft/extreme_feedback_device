@@ -9,26 +9,15 @@ describe ExtremeFeedbackDevice::CLI do
   end
 
   context "with mocked ARGV" do
-    let(:argv) { ["jenkinsUser", "jenkinsToken", "http://localhost/jenkins"] }
+    let(:argv) { ["run", "spec/extreme_feedback_device.yml"] }
     let(:subject) { ExtremeFeedbackDevice::CLI.new(argv) }
 
     it "returns correct jenkins user" do
-      subject.jenkins_user.should eql "jenkinsUser"
+      subject.mode.should eql "run"
     end
 
-    it "returns correct jenkins token" do
-      subject.jenkins_token.should eql "jenkinsToken"
-    end
-
-    it "returns correct jenkins url" do
-      subject.jenkins_url.should eql "http://localhost/jenkins"
-    end
-
-    it "returns correct spi device" do
-      subject.spi_device.should be_nil
-
-      subject.argv << "/dev/fake/spidev0.0"
-      subject.spi_device.should eql "/dev/fake/spidev0.0"
+    it "returns correct settings_yml" do
+      subject.settings_yml.should eql "spec/extreme_feedback_device.yml"
     end
   end
 end

@@ -19,12 +19,13 @@ Gem::Specification.new do |spec|
   spec.require_paths = ["lib"]
 
   spec.add_development_dependency "bundler", "~> 1.3"
-  spec.add_development_dependency "guard-rspec"
-  spec.add_development_dependency "pry"
-  spec.add_development_dependency "rake"
-  spec.add_development_dependency "rspec"
-  spec.add_development_dependency "rb-fsevent"
-  spec.add_development_dependency "rb-inotify"
+  spec.add_development_dependency "guard-rspec", "~> 2.5"
+  spec.add_development_dependency "pry", "~> 0.9"
+  spec.add_development_dependency "rake", "~> 10.1"
+  spec.add_development_dependency "rspec", "~> 2.14"
+  spec.add_development_dependency "rb-fsevent", "~> 0.9"
+  spec.add_development_dependency "rb-inotify", "~> 0.9"
 
-  spec.add_dependency "color"
+  spec.add_dependency "color", "~> 1.4"
+  spec.add_dependency "settingslogic", "~> 2.0"
 end

@@ -1,0 +1,17 @@
+default: &default
+  jenkins:
+    user: api
+    token: 0123456789ABCDEF
+    url: http://jenkins.example.com/
+  loop:
+    sleep: 5
+  pi:
+    num_leds: 2
+    map_leds:
+      i_1: Jenkins - Master
+      i_0: Jenkins - Production
+  spi:
+    device: /dev/spidev0.0
+
+test:
+  <<: *default

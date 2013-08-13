@@ -12,44 +12,43 @@ module ExtremeFeedbackDevice
       @argv = argv
     end
 
-    def jenkins_user
+    def mode
       argv[0]
     end
 
-    def jenkins_token
+    def settings_yml
       argv[1]
     end
 
-    def jenkins_url
+    def settings_ns
       argv[2]
-    end
-
-    def spi_device
-      argv[3]
     end
 
     def usage
       puts <<-EOS
 extreme_feedback_device v#{ExtremeFeedbackDevice::VERSION}
 ------------------------------
-USAGE: extreme_feedback_device JENKINS_USER JENKINS_TOKEN JENKINS_URL [SPI_DEVICE]
-\tJENKINS_USER:\tuser for http basic auth on jenkins api
-\tJENKINS_TOKEN:\ttoken for http basic auth on jenkins api
-\tJENKINS_URL:\tbase url of jenkins
-\tSPI_DEVICE:\tspi device name; default: /dev/spidev0.0
+USAGE: extreme_feedback_device MODE [SETTINGS_YML] [SETTINGS_NS]
+\tMODE:\tcan be run for a single run or loop for an endless loop
+\tSETTINGS_YML:\tpath of settings yml file; default: $HOME/.extreme_feedback_device.yml
+\tSETTINGS_NS:\tnamespace in settings yml file; default: default
 EOS
       -1
     end
 
-    def run
-      ExtremeFeedbackDevice.run(jenkins_user, jenkins_token, jenkins_url, spi_device)
-    end
-
     def main
-      if argv.length < 3 || argv.length > 4
+      if argv.length < 1 || argv.length > 3
         usage
       else
-        run
+        ENV['EFD_YML'] = settings_yml
+        ENV['EFD_NS'] = settings_ns
+
+        if mode =~ /^run$/i
+          ExtremeFeedbackDevice.run
+        elsif mode =~ /^loop$/i
+          ExtremeFeedbackDevice.loop
+        else
+        end
       end
     end
   end

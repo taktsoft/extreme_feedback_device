@@ -1,6 +1,6 @@
 #!/usr/bin/env ruby
 
-if ENV['RUBY_ENV'] == 'development'
+if ENV['EFD_ENV'] == 'development'
   lib = File.expand_path('../../lib', __FILE__)
   $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
 
