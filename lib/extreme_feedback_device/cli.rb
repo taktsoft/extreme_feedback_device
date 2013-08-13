@@ -50,9 +50,9 @@ module ExtremeFeedbackDevice
         puts_help
         exit -1
       else
-        @pid_file = PidFile.new(piddir: pid_dir, pidfile: pid_name)
+        @pid_file = PidFile.new(piddir: File.expand_path(pid_dir), pidfile: pid_name)
 
-        ExtremeFeedbackDevice::Settings.source(settings)
+        ExtremeFeedbackDevice::Settings.source(File.expand_path(settings))
         ExtremeFeedbackDevice::Settings.namespace(namespace)
         ExtremeFeedbackDevice::Settings.reload!
 
@@ -117,16 +117,16 @@ extreme_feedback_device [OPTION] ...
 -h, --help:
 \tshow help.
 
---mode [#{DEFAULT_MODE}]:
+-m, --mode [#{DEFAULT_MODE}]:
 \tset mode 'run' for a single run or 'loop' for infiniti loop.
 
---namespace [#{DEFAULT_NAMESPACE}]:
+-n, --namespace [#{DEFAULT_NAMESPACE}]:
 \tsettings namespace.
 
---pid [#{DEFAULT_PID}]:
+-p, --pid [#{DEFAULT_PID}]:
 \tpid file.
 
---settings [#{DEFAULT_SETTINGS}]:
+-s, --settings [#{DEFAULT_SETTINGS}]:
 \tsettings file.
 
 -v, --version:
