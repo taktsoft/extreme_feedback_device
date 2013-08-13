@@ -24,10 +24,10 @@ VERBOSE=yes
 #
 do_start ()
 {
-  su - ${USER} -c "${DAEMON} start -- --mode loop"
+  su - ${USER} -c "${DAEMON} start -- --mode loop" | grep "running \[pid" >/dev/null
 
-  [ "$?" -gt 0 ] && return 1
-  return 0
+  [ "$?" -gt 0 ] && return 0
+  return 1
 }
 
 #
@@ -35,7 +35,7 @@ do_start ()
 #
 do_stop()
 {
-  su - ${USER} -c "${DAEMON} stop"
+  su - ${USER} -c "${DAEMON} stop" | grep "successfully stopped" >/dev/null
 
   [ "$?" -gt 0 ] && return 1
   return 0
@@ -46,7 +46,7 @@ do_stop()
 #
 do_status()
 {
-  su - ${USER} -c "${DAEMON} status"
+  su - ${USER} -c "${DAEMON} status" | grep "running \[pid" >/dev/null
 
   [ "$?" -gt 0 ] && return 3
   return 0

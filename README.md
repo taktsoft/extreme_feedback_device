@@ -71,6 +71,18 @@ If you want to use another settings namespace, override it with the environment 
 
 TODO: Write usage instructions here
 
+## Daemon
+
+Copy the example init.d script and change it for your needs _(as root)_:
+
+    $ cp `gem contents extreme_feedback_device | grep vendor/init.d/extreme_feedback_device` /etc/init.d/extreme_feedback_device
+    $ chmod u+x /etc/init.d/extreme_feedback_device
+    $ vim /etc/init.d/extreme_feedback_device
+
+If you want to start the daemon automaticaly on boot _(as root)_:
+
+    $ update-rc.d extreme_feedback_device defaults
+
 ## Contributing
 
 1. Fork it
