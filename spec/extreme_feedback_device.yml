@@ -3,7 +3,7 @@ default: &default
     user: api
     token: 0123456789ABCDEF
     url: http://jenkins.example.com/
-  loop:
+  infiniti_loop:
     sleep: 5
   pi:
     num_leds: 2

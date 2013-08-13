@@ -17,28 +17,43 @@ module ExtremeFeedbackDevice
     end
 
     def run
-      jenkins.jobs.each_with_index do |job, job_idx|
-        led_key = settings.pi.map_leds.key(job.name)
-        if led_key
-          led_idx = led_key[2..-1].to_i
-          led = Color::RGB::Green if job.success?
-          led = Color::RGB::Red if job.fail?
-          pi.leds[led_idx] = led
-        else
-          led_idx = settings.pi.num_leds - 1 - job_idx
+      jobs = jenkins.jobs
+      num_leds = settings.pi.num_leds
+      map_leds = settings.pi.map_leds
+
+      num_leds.times do |led_idx|
+        job_name = map_leds["i_#{led_idx}"]
+        if job_name
+          job = jobs.find { |job| job.name == job_name }
+          if job
+            if job.fail?
+              pi.leds[led_idx] = Color::RGB::Red
+            elsif job.unstable?
+              pi.leds[led_idx] = Color::RGB::Yellow
+            elsif job.success?
+              pi.leds[led_idx] = Color::RGB::Green
+            elsif job.inactive?
+              pi.leds[led_idx] = Color::RGB::Grey
+            elsif job.disabled?
+              pi.leds[led_idx] = Color::RGB::Grey
+            else # any other state
+              pi.leds[led_idx] = Color::RGB::Black
+            end
+          else # no job with this name in jenkins
+            pi.leds[led_idx] = Color::RGB::Black
+          end
+        else # no job associated with this led_idx
           pi.leds[led_idx] = Color::RGB::Black
         end
       end
       pi.write!
-      0
     end
 
-    def loop
+    def infiniti_loop
       while true
         run
-        sleep settings.loop.sleep
+        sleep settings.infiniti_loop.sleep
       end
-      0
     end
   end
 end

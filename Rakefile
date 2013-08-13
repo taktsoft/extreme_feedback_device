@@ -15,16 +15,12 @@ namespace :pi do
   namespace :leds do
     desc "turn all LEDs off / black"
     task off: [:environment] do
-      num_leds = ENV['NUM_LEDS'] || 25
-      pi = ExtremeFeedbackDevice::Pi.new(num_leds)
-      pi.leds_black!
+      ExtremeFeedbackDevice.pi.leds_black!
     end
 
     desc "turn all LEDs on / white"
     task on: [:environment] do
-      num_leds = ENV['NUM_LEDS'] || 25
-      pi = ExtremeFeedbackDevice::Pi.new(num_leds)
-      pi.leds_white!
+      ExtremeFeedbackDevice.pi.leds_white!
     end
   end
 end

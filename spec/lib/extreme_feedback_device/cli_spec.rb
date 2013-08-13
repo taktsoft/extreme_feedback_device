@@ -2,6 +2,8 @@ require 'spec_helper'
 require 'extreme_feedback_device/cli'
 
 describe ExtremeFeedbackDevice::CLI do
+  let(:subject) { ExtremeFeedbackDevice::CLI.new([]) }
+
   context "#instance" do
     it "returns an instance of CLI" do
       ExtremeFeedbackDevice::CLI.instance.should be_a ExtremeFeedbackDevice::CLI
@@ -9,15 +11,25 @@ describe ExtremeFeedbackDevice::CLI do
   end
 
   context "with mocked ARGV" do
-    let(:argv) { ["run", "spec/extreme_feedback_device.yml"] }
-    let(:subject) { ExtremeFeedbackDevice::CLI.new(argv) }
-
-    it "returns correct jenkins user" do
+    it "returns correct mode" do
+      subject.argv[0] = 'run'
       subject.mode.should eql "run"
+      subject.argv[0] = 'loop'
+      subject.mode.should eql "loop"
     end
 
-    it "returns correct settings_yml" do
-      subject.settings_yml.should eql "spec/extreme_feedback_device.yml"
+    context ".main" do
+      it "calls ExtremeFeedbackDevice.run in mode run" do
+        ExtremeFeedbackDevice.should_receive(:run)
+        subject.argv[0] = 'run'
+        subject.main
+      end
+
+      it "calls ExtremeFeedbackDevice.infiniti_loop in mode loop" do
+        ExtremeFeedbackDevice.should_receive(:infiniti_loop)
+        subject.argv[0] = 'loop'
+        subject.main
+      end
     end
   end
 end
