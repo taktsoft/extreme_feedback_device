@@ -2,6 +2,8 @@
 
 TODO: Write a gem description
 
+Tested with Ruby v2.0.0p247 running on Raspberry Pi with Raspbian "wheezy" / Debian GNU/Linux 7 "wheezy".
+
 ## Prepare
 
 To get read-write permissions for the SPI-Device with udev you can add the following rule:
@@ -40,7 +42,7 @@ Or install it yourself as:
 
 TODO: Write configuration instruction here
 
-The default location for the settings file is: _$HOME/.extreme\_feedback\_device.yml_
+The default location for the settings file is: _$HOME/.extreme_feedback_device.yml_
 
 If you want to use another settings file, override it with the environment variable _EFD_YML_:
 
