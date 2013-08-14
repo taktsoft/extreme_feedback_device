@@ -2,6 +2,8 @@
 
 TODO: Write a gem description
 
+Fetches Jobs from a Jenkins CI via the REST JSON API and sets LEDs of an Extreme Feedback Device to the status of the corresponding Job.
+
 Tested with Ruby v2.0.0p247 running on Raspberry Pi with Raspbian "wheezy" / Debian GNU/Linux 7 "wheezy".
 
 ## Prepare
@@ -42,15 +44,13 @@ Or install it yourself as:
 
 TODO: Write configuration instruction here
 
-The default location for the settings file is: _$HOME/.extreme_feedback_device.yml_
+The default location for the settings file is: `$HOME/.extreme_feedback_device.yml`
 
-If you want to use another settings file, override it with the environment variable _EFD_YML_:
-
-    $ EFD_YML=/etc/extreme_feedback_device.yml extreme_feedback_device run
-
-If you want to use another settings namespace, override it with the environment variable _EFD_NS_:
-
-    $ EFD_NS=production extreme_feedback_device run
+* `jenkins.*`: ...
+* `infiniti_loop.sleep`: the time _(in seconds)_ to sleep between each request.
+* `pi.num_leds`: the number of LEDs on your attached Extreme Feedback Device.
+* `pi.map_leds`: the mapping of LEDs _(with LED's index)_ to Jenkins Jobs _(with Job's name)_.
+* `spi.devive`: the SPI Device to write on.
 
 ### Example
 
@@ -71,7 +71,27 @@ If you want to use another settings namespace, override it with the environment 
 
 ## Usage
 
-TODO: Write usage instructions here
+Output of `extreme_feedback_device --help`:
+
+    extreme_feedback_device [OPTION] ...
+
+    -h, --help:
+      show help.
+
+    -m, --mode [run]:
+      set mode 'run' for a single run or 'loop' for infiniti loop.
+
+    -n, --namespace [default]:
+      settings namespace.
+
+    -p, --pid [~/.extreme_feedback_device.pid]:
+      pid file.
+
+    -s, --settings [~/.extreme_feedback_device.yml]:
+      settings file.
+
+    -v, --version:
+      show version.
 
 ## Daemon
 
