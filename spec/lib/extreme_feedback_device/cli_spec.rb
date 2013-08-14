@@ -11,7 +11,7 @@ describe ExtremeFeedbackDevice::CLI do
   context ".main" do
     before(:each) do
       ExtremeFeedbackDevice.stub(:run)
-      ExtremeFeedbackDevice.stub(:infiniti_loop)
+      ExtremeFeedbackDevice.stub(:infinite_loop)
       PidFile.stub(:new)
 
       subject.stub(:argv).and_return([])
@@ -33,7 +33,7 @@ describe ExtremeFeedbackDevice::CLI do
 
     it "calls ExtremeFeedbackDevice.run by default" do
       ExtremeFeedbackDevice.should_receive(:run)
-      ExtremeFeedbackDevice.should_not_receive(:infiniti_loop)
+      ExtremeFeedbackDevice.should_not_receive(:infinite_loop)
       subject.main
     end
   end

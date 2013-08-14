@@ -47,7 +47,7 @@ TODO: Write configuration instruction here
 The default location for the settings file is: `$HOME/.extreme_feedback_device.yml`
 
 * `jenkins.*`: ...
-* `infiniti_loop.sleep`: the time _(in seconds)_ to sleep between each request.
+* `infinite_loop.sleep`: the time _(in seconds)_ to sleep between each request.
 * `pi.num_leds`: the number of LEDs on your attached Extreme Feedback Device.
 * `pi.map_leds`: the mapping of LEDs _(with LED's index)_ to Jenkins Jobs _(with Job's name)_.
 * `spi.devive`: the SPI Device to write on.
@@ -59,7 +59,7 @@ The default location for the settings file is: `$HOME/.extreme_feedback_device.y
         user: api
         token: 0123456789ABCDEF
         url: http://jenkins.example.com/
-      infiniti_loop:
+      infinite_loop:
         sleep: 5
       pi:
         num_leds: 2
@@ -79,7 +79,7 @@ Output of `extreme_feedback_device --help`:
       show help.
 
     -m, --mode [run]:
-      set mode 'run' for a single run or 'loop' for infiniti loop.
+      set mode 'run' for a single run or 'loop' for infinite loop.
 
     -n, --namespace [default]:
       settings namespace.
@@ -101,7 +101,7 @@ Copy the example init.d script and change it for your needs _(as root)_:
     $ chmod u+x /etc/init.d/extreme_feedback_device
     $ vim /etc/init.d/extreme_feedback_device
 
-If you want to start the daemon automaticaly on boot _(as root)_:
+If you want to start the daemon automatically on boot _(as root)_:
 
     $ update-rc.d extreme_feedback_device defaults
 

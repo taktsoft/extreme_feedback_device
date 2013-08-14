@@ -60,7 +60,7 @@ module ExtremeFeedbackDevice
           ExtremeFeedbackDevice.run
           exit 0
         elsif mode =~ /^loop$/i
-          ExtremeFeedbackDevice.infiniti_loop
+          ExtremeFeedbackDevice.infinite_loop
           exit 0
         else
           puts_help
@@ -118,7 +118,7 @@ extreme_feedback_device [OPTION] ...
 \tshow help.
 
 -m, --mode [#{DEFAULT_MODE}]:
-\tset mode 'run' for a single run or 'loop' for infiniti loop.
+\tset mode 'run' for a single run or 'loop' for infinite loop.
 
 -n, --namespace [#{DEFAULT_NAMESPACE}]:
 \tsettings namespace.

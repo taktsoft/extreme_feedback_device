@@ -29,6 +29,6 @@ describe ExtremeFeedbackDevice do
   context "#run" do
   end
 
-  context "#loop" do
+  context "#infinite_loop" do
   end
 end

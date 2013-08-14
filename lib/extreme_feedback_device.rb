@@ -58,9 +58,9 @@ module ExtremeFeedbackDevice
       pi.write!
     end
 
-    def infiniti_loop
-      settings['infiniti_loop'] ||= {}
-      interval = settings.infiniti_loop['sleep'] || 30
+    def infinite_loop
+      settings['infinite_loop'] ||= {}
+      interval = settings.infinite_loop['sleep'] || 30
       while true
         run
         sleep(interval)
