@@ -13,6 +13,10 @@ module ExtremeFeedbackDevice
       end
     end
 
+    def environment
+      ENV["EFD_ENV"] || "production"
+    end
+
     def settings
       @settings ||= ExtremeFeedbackDevice::Settings
     end
