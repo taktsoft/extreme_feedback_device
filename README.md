@@ -1,5 +1,8 @@
 # ExtremeFeedbackDevice
 
+[![Gem Version](https://badge.fury.io/rb/extreme_feedback_device.png)](http://badge.fury.io/rb/extreme_feedback_device)
+[![Build Status](https://travis-ci.org/taktsoft/extreme_feedback_device.png)](https://travis-ci.org/taktsoft/extreme_feedback_device)
+
 TODO: Write a gem description
 
 Fetches Jobs from a Jenkins CI via the REST JSON API and sets LEDs of an Extreme Feedback Device to the status of the corresponding Job.
