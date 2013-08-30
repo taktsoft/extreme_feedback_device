@@ -1,6 +1,7 @@
 # ExtremeFeedbackDevice
 
 [![Gem Version](https://badge.fury.io/rb/extreme_feedback_device.png)](http://badge.fury.io/rb/extreme_feedback_device)
+[![Dependency Status](https://gemnasium.com/taktsoft/extreme_feedback_device.png)](https://gemnasium.com/taktsoft/extreme_feedback_device)
 [![Build Status](https://travis-ci.org/taktsoft/extreme_feedback_device.png)](https://travis-ci.org/taktsoft/extreme_feedback_device)
 
 TODO: Write a gem description
