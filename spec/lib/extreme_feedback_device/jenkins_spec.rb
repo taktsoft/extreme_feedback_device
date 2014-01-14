@@ -47,6 +47,13 @@ describe ExtremeFeedbackDevice::Jenkins do
   end
 
   context ".jobs" do
+    context "without mocked JSON" do
+      it "returns nil if host isn't available" do
+        subject.base_url = "http://this-host-isnt-available/"
+        subject.jobs.should be_nil
+      end
+    end
+
     context "with mocked JSON" do
       let(:response) { '''{"jobs":[
         {"name":"Project X - Master","color":"blue","healthReport":[{"score":80}]},

@@ -13,23 +13,9 @@ module ExtremeFeedbackDevice
       URI(full_url)
     end
 
-    def get_json
-      request = ::Net::HTTP::Get.new(full_uri)
-      request.basic_auth(user, token)
-
-      response = ::Net::HTTP.start(full_uri.hostname, full_uri.port) do |http|
-        http.request(request)
-      end
-
-      if response.is_a?(::Net::HTTPSuccess)
-        response.body
-      else
-        nil
-      end
-    end
-
     def jobs
-      jobs_from_json(get_json)
+      json = get_json
+      jobs_from_json(json) if json.is_a?(String)
     end
 
   private
@@ -42,6 +28,26 @@ module ExtremeFeedbackDevice
       end
 
       json_objects["jobs"].map { |json_object| ExtremeFeedbackDevice::Job.from_json_object(json_object) }
+    end
+
+    def get_json
+      request = ::Net::HTTP::Get.new(full_uri)
+      request.basic_auth(user, token)
+
+      response = nil
+      begin
+        response = ::Net::HTTP.start(full_uri.hostname, full_uri.port) do |http|
+          http.request(request)
+        end
+      rescue SocketError => e
+        response = e
+      end
+
+      if response.is_a?(::Net::HTTPSuccess)
+        return response.body
+      else
+        return nil
+      end
     end
   end
 end

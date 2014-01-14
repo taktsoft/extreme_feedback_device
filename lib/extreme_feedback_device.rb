@@ -65,6 +65,16 @@ module ExtremeFeedbackDevice
     def infinite_loop
       settings['infinite_loop'] ||= {}
       interval = settings.infinite_loop['sleep'] || 30
+
+      %w(INT TERM).each do |signal|
+        trap(signal) do
+          puts "\r\nReceived SIGINT - turning off all LEDs and exit ..."
+          pi.leds_black!
+          pi.leds_black! # ... just to be safe
+          exit(0)
+        end
+      end
+
       while true
         run
         sleep(interval)
