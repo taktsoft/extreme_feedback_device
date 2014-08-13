@@ -36,8 +36,10 @@ module ExtremeFeedbackDevice
 
       response = nil
       begin
-        response = ::Net::HTTP.start(full_uri.hostname, full_uri.port) do |http|
-          http.request(request)
+        http = ::Net::HTTP.new(full_uri.hostname, full_uri.port)
+        http.use_ssl = true if full_uri.scheme == "https"
+        http.start do
+          response = http.request(request)
         end
       rescue SocketError => e
         response = e
